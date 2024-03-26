@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dear_diary/Provider/firebaseProvider.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:dear_diary/View/customTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 class signUp extends StatefulWidget {
   final Function()? onTap;
 
@@ -11,20 +15,20 @@ class signUp extends StatefulWidget {
   State<signUp> createState() => _signUpState();
 }
 
-
 class _signUpState extends State<signUp> {
-  final mail=TextEditingController();
-  final password=TextEditingController();
-  final confirmPassword=TextEditingController();
+  final mail = TextEditingController();
+  final password = TextEditingController();
+  final confirmPassword = TextEditingController();
 
-  bool isSeen1=true;
-  bool isSeen2=true;
+  bool isSeen1 = true;
+  bool isSeen2 = true;
   IconData icn1 = Icons.visibility;
   IconData icn2 = Icons.visibility;
-  final key=GlobalKey<FormState>();
-  void SignUp()async{
-    if(key.currentState!.validate()){
-      showDialog(
+  final key = GlobalKey<FormState>();
+
+  void SignUp() async {
+    if (key.currentState!.validate()) {
+      await showDialog(
         context: context,
         builder: (context) {
           return const Center(
@@ -33,10 +37,12 @@ class _signUpState extends State<signUp> {
         },
       );
       try {
-        if (password.text == confirmPassword.text ) {
-         await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        if (password.text == confirmPassword.text) {
+          UserCredential userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(
               email: mail.text, password: password.text);
-
+            FirebaseFirestore.instance.collection('Users').doc(userCredential.user!.uid).collection('Profile').doc(userCredential.user!.email).set({
+            'img':'https://th.bing.com/th?id=OIP.TmFdrhMS6gzhI-ACF3977wHaF2&w=281&h=222&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2'
+          });
 
           if (context.mounted) {
             Navigator.pop(context);
@@ -44,16 +50,18 @@ class _signUpState extends State<signUp> {
           mail.clear();
           password.clear();
         } else {
-          errorMessage('Passwords don\'t match');
+          errorMessage('Passwords don\'t match', );
           Navigator.pop(context);
         }
       } on FirebaseAuthException catch (er) {
         Navigator.pop(context);
-        errorMessage(er.code);
+        errorMessage(er.code, );
       }
+
     }
   }
-  void errorMessage(String msg) {
+
+  void errorMessage(String msg, ) {
     showDialog(
         context: context,
         builder: (context) {
@@ -61,18 +69,19 @@ class _signUpState extends State<signUp> {
             backgroundColor: Theme.of(context).primaryColor,
             title: Center(
                 child: Text(
-                  msg,
-                  style:  TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.white),
-                )),
+              msg,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.white),
+            )),
           );
         });
   }
+
   @override
   Widget build(BuildContext context) {
-    double h=MediaQuery.of(context).size.height;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -81,19 +90,27 @@ class _signUpState extends State<signUp> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                SizedBox(height: h*0.3,),
+                SizedBox(
+                  height: h * 0.3,
+                ),
                 customTextField(
-                  prefixIcon: Icon(Icons.mail,color: Colors.red,),
-                    controller: mail, labelText: 'E-Mail', validator:  (val) {
-
-                  if (val!.isEmpty) {
-                    return 'Please Enter Your Email';
-                  } else if (!val.endsWith('@gmail.com')) {
-                    return 'Please enter a valid Email';
-                  } else {
-                    return null;
-                  }
-                }, color: Colors.red, Seen: false),
+                    prefixIcon: Icon(
+                      Icons.mail,
+                      color: Colors.red,
+                    ),
+                    controller: mail,
+                    labelText: 'E-Mail',
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return 'Please Enter Your Email';
+                      } else if (!val.endsWith('@gmail.com')) {
+                        return 'Please enter a valid Email';
+                      } else {
+                        return null;
+                      }
+                    },
+                    color: Colors.red,
+                    Seen: false),
                 customTextField(
                     suffixIcon: InkWell(
                         onTap: () {
@@ -106,19 +123,32 @@ class _signUpState extends State<signUp> {
                             }
                           });
                         },
-                        child: Icon(icn1,color: Colors.red,)),
-                    prefixIcon: Icon(Icons.password,color: Colors.red,),
-                    controller: password, labelText: 'Password', validator: (val){
-                  if(val!.isEmpty){
-                    return 'Please Enter Password';
-                  }else if(val.length<6){
-                    return 'Please Enter Valid Password';
-                  }else{
-                    return null;
-                  }
-                }, color: Colors.red, Seen: isSeen1),
+                        child: Icon(
+                          icn1,
+                          color: Colors.red,
+                        )),
+                    prefixIcon: Icon(
+                      Icons.password,
+                      color: Colors.red,
+                    ),
+                    controller: password,
+                    labelText: 'Password',
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return 'Please Enter Password';
+                      } else if (val.length < 6) {
+                        return 'Please Enter Valid Password';
+                      } else {
+                        return null;
+                      }
+                    },
+                    color: Colors.red,
+                    Seen: isSeen1),
                 customTextField(
-                    prefixIcon: Icon(Icons.password,color: Colors.red,),
+                    prefixIcon: Icon(
+                      Icons.password,
+                      color: Colors.red,
+                    ),
                     suffixIcon: InkWell(
                         onTap: () {
                           isSeen2 = !isSeen2;
@@ -130,17 +160,28 @@ class _signUpState extends State<signUp> {
                             }
                           });
                         },
-                        child: Icon(icn2,color: Colors.red,)),
-                    controller: confirmPassword, labelText: 'Confirm Password', validator: (val){
-                  if(val!.isEmpty){
-                    return 'Please Enter Password';
-                  }else if(val.length<6){
-                    return 'Please Enter Valid Password';
-                  }else{
-                    return null;
-                  }
-                }, color: Colors.red, Seen: isSeen2),
-                customButton(onPressed: SignUp, child: Text('Sign up')),
+                        child: Icon(
+                          icn2,
+                          color: Colors.red,
+                        )),
+                    controller: confirmPassword,
+                    labelText: 'Confirm Password',
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return 'Please Enter Password';
+                      } else if (val.length < 6) {
+                        return 'Please Enter Valid Password';
+                      } else {
+                        return null;
+                      }
+                    },
+                    color: Colors.red,
+                    Seen: isSeen2),
+                customButton(
+                    onPressed: () {
+                      SignUp();
+                    },
+                    child: Text('Sign up')),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
