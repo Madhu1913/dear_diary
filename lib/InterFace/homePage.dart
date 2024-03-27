@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dear_diary/InterFace/profile.dart';
 import 'package:dear_diary/Locked/checkLock.dart';
-
 import 'package:dear_diary/Locked/setLock.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:dear_diary/View/customImageview.dart';
 import 'package:dear_diary/View/customTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import '../Notifications/firebaseApi.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,6 +23,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final currentUser = FirebaseAuth.instance.currentUser;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,11 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => profileView()));
               },
             ),
-            title: Text('Dear Diary    '),
+            title: InkWell(
+                onTap: ()async{
+                  await FirebaseApi().initNotification();
+                },
+                child: Text('Dear Diary    ')),
             centerTitle: true,
             actions: [
               IconButton(

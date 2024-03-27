@@ -1,6 +1,8 @@
 import 'package:dear_diary/Authentication/Login.dart';
 import 'package:dear_diary/Authentication/authPage.dart';
+import 'package:dear_diary/Notifications/firebaseApi.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
+import 'package:dear_diary/Provider/lockedDataProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -12,6 +14,7 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotification();
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -22,6 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context)=>firebaseMethods()),
+        ChangeNotifierProvider(create: (context)=>lockedData())
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
