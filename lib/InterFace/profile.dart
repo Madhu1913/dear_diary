@@ -65,7 +65,7 @@ class _profileViewState extends State<profileView> {
                               borderRadius: BorderRadius.circular(360)
                             ),
                             child: CircleAvatar(
-                              radius: 100,
+                              radius: 80,
                               backgroundImage: NetworkImage(data['img']),
                             ),
                           ),

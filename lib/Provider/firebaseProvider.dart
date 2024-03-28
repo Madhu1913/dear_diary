@@ -15,6 +15,7 @@ class firebaseMethods extends ChangeNotifier {
   var timeformatter = DateFormat('H:m a');
   var imgtimeformatter = DateFormat('S');
   void addToDB() async {
+    if(note.text.trim()!=''){
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(currentUser!.uid)
@@ -27,6 +28,11 @@ class firebaseMethods extends ChangeNotifier {
       }).then((value) {
         note.clear();
       });
+    }
+    else{
+      Get.snackbar('Note : ', 'Please Enter Something',snackPosition: SnackPosition.BOTTOM,colorText:Palatte.white,backgroundColor: Palatte.buttonColor, );
+    }
+
 
   }
 
@@ -88,13 +94,38 @@ class firebaseMethods extends ChangeNotifier {
   }
 
   void showCalender(context)async {
+
     DateTime? picked=await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
             firstDate: DateTime(1900),
             lastDate: DateTime(2050));
+
        if(picked!=null){
-         Get.to(()=>previousNotes(date: dateformatter.format(picked)));
+         int i=0;
+        // try{
+        //  await FirebaseFirestore.instance.collection('Users').doc(currentUser!.uid).collection(dateformatter.format(picked)).get().then((value){
+        //     if(value.docs.length!=0){
+        //       i=1;
+        //     }else{
+        //       i=0;
+        //     }
+        //     print(i.toString());
+        //     Get.to(()=>previousNotes(date: dateformatter.format(picked),i: i,));
+        //   });
+        //
+        // }catch(e){
+        //   print(e);
+        // }
+        //
+        //  // if(data.docs.length!=0){
+         //     i=1;
+         //   }else{
+         //     i=0;
+         //     // Navigator.pop(context);
+         //   }
+         //   print(i.toString());
+           Get.to(()=>previousNotes(date: dateformatter.format(picked),));
        }
     notifyListeners();
   }

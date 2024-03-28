@@ -151,32 +151,39 @@ class _HomePageState extends State<HomePage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(data[i]['Time']),
+                                              Container(
+                                                  decoration:BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    color: Palatte.mainColor
+                                                  ),
+                                                  padding: EdgeInsets.all(6),
+                                                  child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
                                               SizedBox(
                                                 width: 20,
                                               ),
                                               Flexible(
                                                 child: Container(
-                                                  // width: w*0.7,
                                                   padding: EdgeInsets.all(10),
                                                   decoration: BoxDecoration(
-                                                      color: Palatte.mainColor2, // Background color when swiping
+                                                      color: Palatte.white, // Background color when swiping
                                                       borderRadius:
                                                           BorderRadius.only(
                                                               topRight:
                                                                   Radius.circular(
-                                                                      16),
+                                                                      12),
                                                               topLeft:
                                                                   Radius.circular(
-                                                                      16),
+                                                                      12),
                                                               bottomLeft:
                                                                   Radius.circular(
-                                                                      16))),
+                                                                      12)),
+                                                  border: Border.all(color: Palatte.mainColor2)
+                                                  ),
                                                   child: Text(
                                                     data[i]['note'],
                                                     style: TextStyle(
                                                         fontSize: 18,
-                                                        color: Colors.white),
+                                                        color: Palatte.mainColor2),
                                                   ),
                                                 ),
                                               )
@@ -195,6 +202,7 @@ class _HomePageState extends State<HomePage> {
                                                   height: h * 0.25,
                                                   width: h * 0.25,
                                                   decoration: BoxDecoration(
+                                                    border: Border.all(color: Palatte.mainColor2),
                                                       image: DecorationImage(
                                                           image: NetworkImage(
                                                               data[i]['note']),
@@ -215,7 +223,13 @@ class _HomePageState extends State<HomePage> {
                                               SizedBox(
                                                 width: 20,
                                               ),
-                                              Text(data[i]['Time']),
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Palatte.mainColor,
+                                                    borderRadius: BorderRadius.circular(8)
+                                                  ),
+                                                  padding: EdgeInsets.all(6),
+                                                  child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
                                             ],
                                           ),
                                   ),
@@ -272,7 +286,9 @@ class _HomePageState extends State<HomePage> {
                           )
                         ),
                         child: IconButton(
-                            onPressed: value.addToDB,
+                            onPressed: (){
+                              value.addToDB();
+                            },
                             icon: Icon(
                               Icons.done_outline_rounded,
                               color: Palatte.mainColor2,

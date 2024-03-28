@@ -11,13 +11,35 @@ import '../View/customImageview.dart';
 
 class previousNotes extends StatefulWidget {
   final String date;
-  const previousNotes({super.key, required this.date});
+
+  const previousNotes({super.key, required this.date,});
 
   @override
   State<previousNotes> createState() => _previousNotesState();
 }
 
 class _previousNotesState extends State<previousNotes> {
+  int? i;
+  bool isLoading=true;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     getdata();
+  }
+  Future getdata()async{
+    await FirebaseFirestore.instance.collection('Users').doc(currentUser!.uid).collection(widget.date).get().then((value){
+      if(value.docs.length!=0){
+       i=1;
+      }else{
+    i=0;
+      }
+     setState(() {
+       isLoading=false;
+     });
+    });
+
+  }
   final currentUser=FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
@@ -25,13 +47,15 @@ class _previousNotesState extends State<previousNotes> {
     return SafeArea(
         child: Consumer<firebaseMethods>(
           builder: (context,value,child)=>Scaffold(
-            appBar: AppBar(title: Text('Dear Diary',style: TextStyle(color: Colors.black),),centerTitle: true,leading: IconButton(
+            appBar: AppBar(
+              elevation: 0,
+              title: Text('Dear Diary',style: TextStyle(color: Colors.black),),centerTitle: true,leading: IconButton(
               onPressed: (){
                 Get.off(()=>HomePage());
               },
               icon: Icon(Icons.arrow_back,color: Colors.black,),
             ),),
-                body:  StreamBuilder(
+                body:  isLoading ? Center(child:CircularProgressIndicator()):i==1?StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('Users')
                 .doc(currentUser!.uid)
@@ -126,13 +150,13 @@ class _previousNotesState extends State<previousNotes> {
                 return Center(
                   child: Text('${snapshot.error}'),
                 );
-              }else if(!snapshot.hasData){
-                return Center(child: Text('No Data Found'),);
               }
               return Center(
                 child: CircularProgressIndicator(),
               );
-            }),
+            }):Center(
+                  child: Text('No data found'),
+                ),
               ),
         ));
   }

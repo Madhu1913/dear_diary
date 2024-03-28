@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dear_diary/View/palatte.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -12,25 +13,30 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import '../InterFace/previousNotes.dart';
+import '../Locked/lockedPreviousNotes.dart';
 class lockedData extends ChangeNotifier{
   final currentUser = FirebaseAuth.instance.currentUser;
   var dateformatter = DateFormat('dd-MM-yyyy');
   var timeformatter = DateFormat('H:m a');
   var imgtimeformatter = DateFormat('S');
   void addToDB() async {
+if(note.text.trim()!=''){
 
-      await FirebaseFirestore.instance
-          .collection('Users')
-          .doc(currentUser!.uid)
-          .collection('Locked-${dateformatter.format(DateTime.now())}')
-          .add({
-        'note': note.text.trim(),
-        'Time': timeformatter.format(DateTime.now()),
-        'TimeStamp': Timestamp.now(),
-        'differentiator': 1
-      }).then((value) {
-        note.clear();
-      });
+  await FirebaseFirestore.instance
+      .collection('Users')
+      .doc(currentUser!.uid)
+      .collection('Locked-${dateformatter.format(DateTime.now())}')
+      .add({
+    'note': note.text.trim(),
+    'Time': timeformatter.format(DateTime.now()),
+    'TimeStamp': Timestamp.now(),
+    'differentiator': 1
+  }).then((value) {
+    note.clear();
+  });
+}else{
+  Get.snackbar('Note : ', 'Please Enter Something',snackPosition: SnackPosition.BOTTOM,colorText:Palatte.white,backgroundColor: Palatte.buttonColor, );
+}
 
   }
 
@@ -88,18 +94,16 @@ class lockedData extends ChangeNotifier{
     });
     notifyListeners();
   }
-  void showCalender(context){
-    showDatePicker(
+  void showCalender(context)async {
+    DateTime? picked=await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
-        lastDate: DateTime(2050)
-    ).then((value){
-      if(value==null){
-        Navigator.pop(context);
-      }
-      Get.to(()=>previousNotes(date: 'Locked-${dateformatter.format(value!)}'));
-    });
+        lastDate: DateTime(2050));
+    if(picked!=null){
+
+      await Get.to(()=>lockedPreviousNotes(date: 'Locked-${dateformatter.format(picked)}'));
+    }
     notifyListeners();
   }
 

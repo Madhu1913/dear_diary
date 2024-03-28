@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context)=>lockedData())
       ],
       child: GetMaterialApp(
+        title: 'Dear Diary',
         theme: ThemeData(
           useMaterial3: false
         ).copyWith(

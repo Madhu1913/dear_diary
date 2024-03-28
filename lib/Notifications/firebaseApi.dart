@@ -34,7 +34,7 @@ class FirebaseApi{
   void handleMessage(RemoteMessage? message){
     if(message==null) {return; }
     else{
-      Get.to(()=>addReminders());
+      Get.to(()=>HomePage());
     }
 
   }
@@ -62,7 +62,7 @@ class FirebaseApi{
                 androidChannel.id,
                 androidChannel.name,
                 channelDescription: androidChannel.description,
-                icon: '@mipmap/ic_launcher'
+                icon: '@drawable/appicon'
             )
         ),
         payload: jsonEncode({
@@ -110,7 +110,7 @@ class FirebaseApi{
                 androidChannel.id,
                 androidChannel.name,
                 channelDescription: androidChannel.description,
-                icon: '@mipmap/ic_launcher'
+                icon: '@drawable/appicon'
               )
             ),
           payload: jsonEncode(event.toMap())
@@ -121,7 +121,7 @@ class FirebaseApi{
 
 
   Future initLocalNotifications()async{
-    const android=AndroidInitializationSettings('@mipmap/ic_launcher');
+    const android=AndroidInitializationSettings('@drawable/appicon');
     const settings=InitializationSettings(android: android);
     await flutterLocalNotificationsPlugin.initialize(settings,
       onDidReceiveNotificationResponse: (details){

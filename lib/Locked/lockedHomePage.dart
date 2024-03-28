@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../View/customButton.dart';
 import '../View/customImageview.dart';
+import '../View/customLockedImageView.dart';
 import '../View/customTextField.dart';
 import '../View/palatte.dart';
 
@@ -93,7 +94,13 @@ class _myDiaryState extends State<myDiary> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(data[i]['Time']),
+                                            Container(
+                                                decoration:BoxDecoration(
+                                                  color: Palatte.mainColor,
+                                                  borderRadius: BorderRadius.circular(8)
+                                                ),
+                                                padding: EdgeInsets.all(6),
+                                                child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
                                             SizedBox(
                                               width: 20,
                                             ),
@@ -102,24 +109,26 @@ class _myDiaryState extends State<myDiary> {
                                                 // width: w*0.7,
                                                 padding: EdgeInsets.all(10),
                                                 decoration: BoxDecoration(
-                                                    color: Palatte.mainColor2,
-
+                                                    color: Palatte.white,
+                                                    border: Border.all(
+                                                      color: Palatte.mainColor2
+                                                    ),
                                                     borderRadius:
                                                         BorderRadius.only(
                                                             topRight:
                                                                 Radius.circular(
-                                                                    16),
+                                                                    12),
                                                             topLeft:
                                                                 Radius.circular(
-                                                                    16),
+                                                                    12),
                                                             bottomLeft:
                                                                 Radius.circular(
-                                                                    16))),
+                                                                    12))),
                                                 child: Text(
                                                   data[i]['note'],
                                                   style: TextStyle(
                                                       fontSize: 18,
-                                                      color: Colors.white),
+                                                      color: Palatte.mainColor2),
                                                 ),
                                               ),
                                             )
@@ -131,13 +140,16 @@ class _myDiaryState extends State<myDiary> {
                                           children: [
                                             GestureDetector(
                                               onTap: () {
-                                                Get.to(()=>customImageView(img: data[i]
+                                                Get.to(()=>customLockedImageView(img: data[i]
                                                 ['note']));
                                               },
                                               child: Container(
                                                 height: h * 0.25,
                                                 width: h * 0.25,
                                                 decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Palatte.mainColor2,width: 2
+                                                  ),
                                                     image: DecorationImage(
                                                         image: NetworkImage(
                                                             data[i]['note']),
@@ -158,7 +170,13 @@ class _myDiaryState extends State<myDiary> {
                                             SizedBox(
                                               width: 20,
                                             ),
-                                            Text(data[i]['Time']),
+                                            Container(
+                                                decoration: BoxDecoration(
+                                                  color: Palatte.mainColor,
+                                                  borderRadius: BorderRadius.circular(8)
+                                                ),
+                                                padding: EdgeInsets.all(6),
+                                                child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
                                           ],
                                         ),
                                 ),

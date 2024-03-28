@@ -7,6 +7,7 @@ import 'package:dear_diary/Provider/lockedDataProvider.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:dear_diary/View/customTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
@@ -79,12 +80,14 @@ class _addRemindersState extends State<addReminders> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  data[i]['Task'],
-                                  style: TextStyle(
-                                      color: Palatte.mainColor2,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
+                                Flexible(
+                                  child: Text(
+                                    data[i]['Task'],
+                                    style: TextStyle(
+                                        color: Palatte.mainColor2,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                 IconButton(
                                     onPressed: () async {
@@ -129,24 +132,22 @@ class _addRemindersState extends State<addReminders> {
                   context: context,
                   builder: (context) => AlertDialog(
                         title: Text('Add Reminder?'),
-                        content: Flexible(
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: 200,
-                              minHeight: 20,
-                              maxWidth: 200,
-                              maxHeight: 160
-                            ),
-                            child: Scrollbar(
-                              child: customTextField(
-                                maxLines: null,
-                                color: Palatte.mainColor2,
-                                controller: task,
-                                validator: (val) =>
-                                    val!.isEmpty ? 'Please enter a Reminder' : null,
-                                labelText: 'Reminder',
-                                Seen: false,
-                              ),
+                        content: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: 200,
+                            minHeight: 20,
+                            maxWidth: 200,
+                            maxHeight: 160
+                          ),
+                          child: Scrollbar(
+                            child: customTextField(
+                              maxLines: null,
+                              color: Palatte.mainColor2,
+                              controller: task,
+                              validator: (val) =>
+                                  val!.isEmpty ? 'Please enter a Reminder' : null,
+                              labelText: 'Reminder',
+                              Seen: false,
                             ),
                           ),
                         ),
