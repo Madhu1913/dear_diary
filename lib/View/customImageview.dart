@@ -1,4 +1,6 @@
+import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 class customImageView extends StatelessWidget {
  final  String img;
   const customImageView({super.key, required this.img});
@@ -10,7 +12,7 @@ class customImageView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(onPressed: (){
-            Navigator.pop(context);
+            Get.off(()=>HomePage());
           },
           icon: Icon(Icons.arrow_back),),
         ),

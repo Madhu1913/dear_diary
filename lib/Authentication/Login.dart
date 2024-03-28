@@ -3,6 +3,8 @@ import 'package:dear_diary/View/customTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../View/palatte.dart';
+
 class login extends StatefulWidget {
   final Function()? onTap;
 
@@ -77,11 +79,23 @@ class _loginState extends State<login> {
             child: Column(
               children: [
                 SizedBox(
-                  height: h * 0.4,
+                  height: h * 0.15,
                 ),
+                Container(
+                  height:w*0.4,
+                  width: w*0.4,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage('assets/appicon.png'),
+                          fit: BoxFit.fill)
+                  ),
+                ),
+                // SizedBox(height: w*0.04,),
+                Text('Dear Diary',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w500),),
                 customTextField(
-                    Seen: false,
-                    prefixIcon: Icon(Icons.email,color: Colors.red,),
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
+                  Seen: false,
+                    prefixIcon: Icon(Icons.email,color: Palatte.mainColor2,),
                     controller: email,
                     labelText: 'Enter Your Email',
                     validator: (val) {
@@ -93,10 +107,14 @@ class _loginState extends State<login> {
                         return null;
                       }
                     },
-                    color: Colors.red),
+                  color: Palatte.mainColor2,
+                ),
                 customTextField(
-                    Seen: isSeen,
-                    prefixIcon: Icon(Icons.password,color: Colors.red,),
+                  maxLines: 1,
+                  keyboardType: TextInputType.text,
+
+                  Seen: isSeen,
+                    prefixIcon: Icon(Icons.password,color: Palatte.mainColor2,),
                     suffixIcon: InkWell(
                         onTap: () {
                           isSeen = !isSeen;
@@ -108,7 +126,9 @@ class _loginState extends State<login> {
                             }
                           });
                         },
-                        child: Icon(icn,color: Colors.red,)),
+                        child: Icon(icn,
+                          color: Palatte.mainColor2,
+                        )),
                     controller: password,
                     labelText: 'Enter Your Password',
                     validator: (val){
@@ -120,11 +140,14 @@ class _loginState extends State<login> {
                         return null;
                       }
                     },
-                    color: Colors.red),
+                  color: Palatte.mainColor2,
+                ),
                 SizedBox(
                   height: 20,
                 ),
-                customButton(onPressed: Login, child: Text('Login')),
+                customButton(
+                    color: Palatte.buttonColor,
+                    onPressed: Login, child: Text('Login')),
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -138,9 +161,9 @@ class _loginState extends State<login> {
                         child: Text(
                           'Register',
                           style: TextStyle(
-                              color: Colors.red,
+                              color: Palatte.mainColor2,
                               fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                              fontSize: 18),
                         )),
                   ],
                 )

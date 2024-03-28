@@ -1,10 +1,12 @@
+import 'package:dear_diary/View/palatte.dart';
 import 'package:flutter/material.dart';
 
 class customButton extends StatefulWidget {
   final void Function() onPressed;
   final Widget child;
+  final Color color;
 
-  const customButton({super.key, required this.onPressed, required this.child});
+  const customButton({super.key, required this.onPressed, required this.child, required this.color});
 
   @override
   State<customButton> createState() => _customButtonState();
@@ -17,10 +19,10 @@ class _customButtonState extends State<customButton> {
       onPressed: widget.onPressed,
       child: widget.child,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.red,
-        foregroundColor: Colors.white,
+        backgroundColor: widget.color,
+        foregroundColor: Palatte.white,
         elevation: 10,
-        padding: EdgeInsets.all(10),
+        // padding: EdgeInsets.all(10),
       ),
     );
   }

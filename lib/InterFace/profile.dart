@@ -1,10 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import '../View/palatte.dart';
 
 class profileView extends StatefulWidget {
   const profileView({super.key});
@@ -20,19 +25,20 @@ class _profileViewState extends State<profileView> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Dear Diary'),
+            elevation: 0,
+            title: Text('Dear Diary',style: TextStyle(color: Colors.black),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(Icons.arrow_back,color: Colors.black,),
               onPressed: () {
-                Navigator.pop(context);
+                Get.off(()=>HomePage());
               },
             ),
             actions: [
               IconButton(onPressed: (){
                 Navigator.pop(context);
                 FirebaseAuth.instance.signOut();
-              }, icon: Icon(Icons.logout))
+              }, icon: Icon(Icons.logout,color: Colors.black,))
             ],
           ),
           body: StreamBuilder(
@@ -50,30 +56,51 @@ class _profileViewState extends State<profileView> {
                     children: [
                       Center(
                         child: Stack(alignment: Alignment(1, 1), children: [
-                          CircleAvatar(
-                            radius: 100,
-                            backgroundImage: NetworkImage(data['img']),
+                          Container(
+                            decoration:BoxDecoration(
+                              border: Border.all(
+                                color: Palatte.mainColor2,
+                                width: 4
+                              ),
+                              borderRadius: BorderRadius.circular(360)
+                            ),
+                            child: CircleAvatar(
+                              radius: 100,
+                              backgroundImage: NetworkImage(data['img']),
+                            ),
                           ),
-                          customButton(
-                              onPressed: () {
-                                value.selectProfileImage();
-                              },
-                              child: Icon(Icons.add))
+                          Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(360),
+                              color: Palatte.mainColor
+                            ),
+                            child: Center(
+                              child: IconButton(
+                                  onPressed: () {
+                                    value.selectProfileImage();
+                                  },
+                                  icon: Icon(Icons.image,size:36,color: Palatte.mainColor2,)),
+                            ),
+                          )
                         ]),
                       ),
                       Flexible(
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(24),
-                              color: Colors.red),
+                            border: Border.all(color: Palatte.mainColor,width: 3)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(20),
                           child: Text(
-                            '${currentUser!.email}',
+                            'E-mail : ${currentUser!.email}',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white),
+                              color: Palatte.mainColor2,
+                            ),
                           ),
                         ),
                       )

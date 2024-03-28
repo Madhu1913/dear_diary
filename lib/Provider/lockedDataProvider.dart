@@ -1,12 +1,16 @@
+import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-
+import 'package:http/http.dart' as http;
 import '../InterFace/previousNotes.dart';
 class lockedData extends ChangeNotifier{
   final currentUser = FirebaseAuth.instance.currentUser;
@@ -14,7 +18,6 @@ class lockedData extends ChangeNotifier{
   var timeformatter = DateFormat('H:m a');
   var imgtimeformatter = DateFormat('S');
   void addToDB() async {
-    if (key.currentState!.validate()) {
 
       await FirebaseFirestore.instance
           .collection('Users')
@@ -28,11 +31,10 @@ class lockedData extends ChangeNotifier{
       }).then((value) {
         note.clear();
       });
-    }
+
   }
 
   final note = TextEditingController();
-  final key = GlobalKey<FormState>();
 
   String? Images;
   File? _selectedImage;
@@ -56,7 +58,6 @@ class lockedData extends ChangeNotifier{
     notifyListeners();
     final snapshot = await uploadTask!.whenComplete(() {});
     final urlDownload = await snapshot.ref.getDownloadURL();
-
     Images = urlDownload;
   }
 
@@ -94,8 +95,61 @@ class lockedData extends ChangeNotifier{
         firstDate: DateTime(1900),
         lastDate: DateTime(2050)
     ).then((value){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>previousNotes(date: 'Locked-${dateformatter.format(value!)}')));
+      if(value==null){
+        Navigator.pop(context);
+      }
+      Get.to(()=>previousNotes(date: 'Locked-${dateformatter.format(value!)}'));
     });
     notifyListeners();
   }
+
+  void sendPushMessage(String token,String body,String title)async{
+    try{
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: <String,String>{
+          'Content-Type':'application/json',
+          'Authorization':'key=AAAAVJV8HNo:APA91bFJJmMDCKOGP7FV_ZHB_zqHprtB7UeVRaIdyq1PqsenDH6ZP1FA6nGqEhrV2eDAcOKMcVEknbmT9CCPS7gO2bG2PguqmFWRKT-m-syFYwjDJjyc7OG0EKSwDzNLJSo9e3EcoXRk'
+        },
+        body: jsonEncode(
+          <String,dynamic>{
+            'priority':'high',
+            'data':<String,dynamic>{
+              'click-action':'FLUTTER_NOTIFICATION_CLICK',
+              'status':'done',
+              'body':body,
+              'title':title,
+            },
+            "notification":<String,dynamic>{
+              'title':title,
+              'body':body,
+              'android_channel_id':'dbfood'
+            },
+            "to":token,
+          }
+        )
+      );
+    }catch(e){
+      if(kDebugMode){
+        print('Error-push-notification');
+      }
+    }
+    notifyListeners();
+  }
+ var myformatter=DateFormat('dd-mm-yyyy,H:mm a');
+  var now;
+  void addTaskTodb(String data,DateTime value)async{
+     now=myformatter.format(DateTime.now());
+    await FirebaseFirestore.instance.collection('Users').doc(currentUser!.uid).collection('Reminders').add(
+        {
+          'Task':data,
+          'time':value,
+          'Time':myformatter.format(value),
+          'TimeStamp':Timestamp.now(),
+
+
+        });
+    notifyListeners();
+  }
+
 }

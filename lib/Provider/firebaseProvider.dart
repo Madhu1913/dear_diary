@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dear_diary/InterFace/previousNotes.dart';
+import 'package:dear_diary/View/palatte.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -13,7 +15,6 @@ class firebaseMethods extends ChangeNotifier {
   var timeformatter = DateFormat('H:m a');
   var imgtimeformatter = DateFormat('S');
   void addToDB() async {
-    if (key.currentState!.validate()) {
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(currentUser!.uid)
@@ -26,11 +27,10 @@ class firebaseMethods extends ChangeNotifier {
       }).then((value) {
         note.clear();
       });
-    }
+
   }
 
   final note = TextEditingController();
-  final key = GlobalKey<FormState>();
 
   String? Images;
   File? _selectedImage;
@@ -87,19 +87,15 @@ class firebaseMethods extends ChangeNotifier {
     notifyListeners();
   }
 
-  void showCalender(context) {
-    showDatePicker(
+  void showCalender(context)async {
+    DateTime? picked=await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
             firstDate: DateTime(1900),
-            lastDate: DateTime(2050))
-        .then((value) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  previousNotes(date: dateformatter.format(value!))));
-    });
+            lastDate: DateTime(2050));
+       if(picked!=null){
+         Get.to(()=>previousNotes(date: dateformatter.format(picked)));
+       }
     notifyListeners();
   }
 

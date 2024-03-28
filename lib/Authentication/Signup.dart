@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:dear_diary/View/customTextField.dart';
+import 'package:dear_diary/View/palatte.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class signUp extends StatefulWidget {
@@ -26,16 +29,19 @@ class _signUpState extends State<signUp> {
   IconData icn2 = Icons.visibility;
   final key = GlobalKey<FormState>();
 
+  bool cpi=true;
+
   void SignUp() async {
     if (key.currentState!.validate()) {
-      await showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      );
+      // await showDialog(
+      //   context: context,
+      //   builder: (context) {
+      //     return const Center(
+      //       child: CircularProgressIndicator(),
+      //     );
+      //   },
+      // );
+     
       try {
         if (password.text == confirmPassword.text) {
           UserCredential userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -44,17 +50,17 @@ class _signUpState extends State<signUp> {
             'img':'https://th.bing.com/th?id=OIP.TmFdrhMS6gzhI-ACF3977wHaF2&w=281&h=222&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2'
           });
 
-          if (context.mounted) {
-            Navigator.pop(context);
-          }
+          // if (context.mounted) {
+          //   Navigator.pop(context);
+          // }
           mail.clear();
           password.clear();
         } else {
           errorMessage('Passwords don\'t match', );
-          Navigator.pop(context);
+          // Navigator.pop(context);
         }
       } on FirebaseAuthException catch (er) {
-        Navigator.pop(context);
+        // Navigator.pop(context);
         errorMessage(er.code, );
       }
 
@@ -82,6 +88,7 @@ class _signUpState extends State<signUp> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
+    double w= MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -91,12 +98,25 @@ class _signUpState extends State<signUp> {
             child: Column(
               children: [
                 SizedBox(
-                  height: h * 0.3,
+                  height: h * 0.15,
                 ),
+                Container(
+                  height:w*0.4,
+                  width: w*0.4,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage('assets/appicon.png'),
+                          fit: BoxFit.fill)
+                  ),
+                ),
+                // SizedBox(height: w*0.04,),
+                Text('Dear Diary',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w500),),
                 customTextField(
+maxLines: 1,
+                    keyboardType: TextInputType.text,
+
                     prefixIcon: Icon(
                       Icons.mail,
-                      color: Colors.red,
+                      color: Palatte.mainColor2,
                     ),
                     controller: mail,
                     labelText: 'E-Mail',
@@ -109,9 +129,12 @@ class _signUpState extends State<signUp> {
                         return null;
                       }
                     },
-                    color: Colors.red,
+                    color: Palatte.mainColor2,
                     Seen: false),
                 customTextField(
+                  maxLines: 1,
+                    keyboardType: TextInputType.text,
+
                     suffixIcon: InkWell(
                         onTap: () {
                           isSeen1 = !isSeen1;
@@ -125,11 +148,11 @@ class _signUpState extends State<signUp> {
                         },
                         child: Icon(
                           icn1,
-                          color: Colors.red,
+                          color: Palatte.mainColor2,
                         )),
                     prefixIcon: Icon(
                       Icons.password,
-                      color: Colors.red,
+                      color: Palatte.mainColor2,
                     ),
                     controller: password,
                     labelText: 'Password',
@@ -142,12 +165,14 @@ class _signUpState extends State<signUp> {
                         return null;
                       }
                     },
-                    color: Colors.red,
+                    color: Palatte.mainColor2,
                     Seen: isSeen1),
                 customTextField(
+                  maxLines: 1,
+                  keyboardType: TextInputType.text,
                     prefixIcon: Icon(
                       Icons.password,
-                      color: Colors.red,
+                      color: Palatte.mainColor2,
                     ),
                     suffixIcon: InkWell(
                         onTap: () {
@@ -162,7 +187,7 @@ class _signUpState extends State<signUp> {
                         },
                         child: Icon(
                           icn2,
-                          color: Colors.red,
+                          color: Palatte.mainColor2,
                         )),
                     controller: confirmPassword,
                     labelText: 'Confirm Password',
@@ -175,13 +200,14 @@ class _signUpState extends State<signUp> {
                         return null;
                       }
                     },
-                    color: Colors.red,
+                    color: Palatte.mainColor2,
                     Seen: isSeen2),
                 customButton(
                     onPressed: () {
                       SignUp();
                     },
-                    child: Text('Sign up')),
+                    color: Palatte.buttonColor,
+                    child: Text('Sign up',style: TextStyle(fontSize: 18),)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -197,9 +223,9 @@ class _signUpState extends State<signUp> {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                              color: Colors.red,
+                              color: Palatte.mainColor2,
                               fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                              fontSize: 18),
                         )),
                   ],
                 )

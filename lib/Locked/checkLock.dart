@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:dear_diary/Locked/lockedHomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../View/customButton.dart';
+import '../View/palatte.dart';
 
 class checkLock extends StatefulWidget {
   const checkLock({super.key});
@@ -22,14 +24,14 @@ class _checkLockState extends State<checkLock> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('My Diary'),
+          elevation: 0,
+          title: Text('My Diary',style: TextStyle(fontSize: 26,color: Colors.black),),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
+             Get.off(()=>HomePage());
             },
-            icon: Icon(Icons.arrow_back),
+            icon: Icon(Icons.arrow_back,color: Colors.black,),
           ),
         ),
         body: Column(
@@ -42,12 +44,22 @@ class _checkLockState extends State<checkLock> {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  note,
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold),
+                Flexible(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Palatte.mainColor,width: 2)
+                    ),
+                    padding: EdgeInsets.all(20),
+                    // margin: EdgeInsets.all(10),
+                    child: Text(
+                      note,
+                      style: TextStyle(
+                          color: Palatte.mainColor2,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -67,7 +79,7 @@ class _checkLockState extends State<checkLock> {
             ),
             Divider(
               thickness: 2,
-              color: Colors.red,
+              color:Palatte.mainColor2,
               indent: 20,
               endIndent: 20,
             ),
@@ -87,6 +99,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -102,6 +118,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -117,6 +137,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -140,6 +164,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -155,6 +183,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -170,6 +202,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -193,6 +229,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -208,6 +248,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -223,6 +267,10 @@ class _checkLockState extends State<checkLock> {
                           setState(() {});
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Palatte.mainColor,width: 2)
+                          ),
                           padding: EdgeInsets.all(20),
                           margin: EdgeInsets.all(10),
                           child: Text(
@@ -244,7 +292,11 @@ class _checkLockState extends State<checkLock> {
                         setState(() {});
                       },
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Palatte.mainColor,width: 2)
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                         margin: EdgeInsets.all(10),
                         child: Text(
                           '0',
@@ -262,24 +314,38 @@ class _checkLockState extends State<checkLock> {
                             .snapshots(),
                         builder: (context, snapshot) {
                           var password = snapshot.data!['lock'];
-                          return customButton(
-                            onPressed: () async {
-                              if (ListEquality().equals(password, data)) {
-                                Get.to(() => myDiary());
-                              } else {
-                                note = 'Please enter correct password';
-                              }
-                              setState(() {});
-                            },
-                            child: Text('OK'),
+                          return Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Palatte.mainColor,width: 2)
+                            ),
+                            child: TextButton(
+
+                              onPressed: () async {
+                                if (ListEquality().equals(password, data)) {
+                                  Get.to(() => myDiary());
+                                } else {
+                                  note = 'Please enter correct password';
+                                }
+                                setState(() {});
+                              },
+                              child: Text('OK',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
+                            ),
                           );
                         }),
-                    customButton(
-                      onPressed: () {
-                        data.removeLast();
-                        setState(() {});
-                      },
-                      child: Text('Delete'),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Palatte.mainColor,width: 2)
+                      ),
+                      child: TextButton(
+
+                        onPressed: () {
+                          data.removeLast();
+                          setState(() {});
+                        },
+                        child: Text('Delete',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
+                      ),
                     )
                   ],
                 ),

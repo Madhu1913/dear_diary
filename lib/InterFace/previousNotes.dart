@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
+import 'package:dear_diary/View/palatte.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../View/customImageview.dart';
@@ -22,11 +25,11 @@ class _previousNotesState extends State<previousNotes> {
     return SafeArea(
         child: Consumer<firebaseMethods>(
           builder: (context,value,child)=>Scaffold(
-            appBar: AppBar(title: Text('Dear Diary'),centerTitle: true,leading: IconButton(
+            appBar: AppBar(title: Text('Dear Diary',style: TextStyle(color: Colors.black),),centerTitle: true,leading: IconButton(
               onPressed: (){
-                Navigator.pop(context);
+                Get.off(()=>HomePage());
               },
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(Icons.arrow_back,color: Colors.black,),
             ),),
                 body:  StreamBuilder(
             stream: FirebaseFirestore.instance
@@ -60,7 +63,7 @@ class _previousNotesState extends State<previousNotes> {
                                 // width: w*0.7,
                                 padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                    color: Colors.red,
+                                    color: Palatte.mainColor2,
                                     borderRadius:
                                     BorderRadius.only(
                                         topRight:
@@ -88,13 +91,8 @@ class _previousNotesState extends State<previousNotes> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            customImageView(
-                                                img: data[i]
-                                                ['note'])));
+                                Get.to(()=>customImageView(img: data[i]
+                                ['note']));
                               },
                               child: Container(
                                 height: h * 0.25,
