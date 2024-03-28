@@ -1,13 +1,8 @@
 
 
 import 'package:dear_diary/InterFace/homePage.dart';
-import 'package:dear_diary/Locked/checkLock.dart';
-import 'package:dear_diary/View/customButton.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../View/palatte.dart';
 import 'confirmLock.dart';
@@ -28,23 +23,23 @@ class _setLockState extends State<setLock> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text('My Diary',style: TextStyle(color: Colors.black,fontSize: 26),),
+          title: const Text('My Diary',style: TextStyle(color: Colors.black,fontSize: 26),),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              Get.off(() => HomePage());
+              Get.off(() => const HomePage());
             },
-            icon: Icon(Icons.arrow_back,color: Colors.black,),
+            icon: const Icon(Icons.arrow_back,color: Colors.black,),
           ),
         ),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Flexible(
@@ -53,11 +48,11 @@ class _setLockState extends State<setLock> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Palatte.mainColor,width: 2)
                     ),
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     // margin: EdgeInsets.all(10),
                     child: Text(
                       note,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Palatte.mainColor2,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
@@ -66,7 +61,7 @@ class _setLockState extends State<setLock> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             SingleChildScrollView(
@@ -75,18 +70,18 @@ class _setLockState extends State<setLock> {
                 children: [
                   Text(
                     data.join("  "),
-                    style: TextStyle(fontSize: 30),
+                    style: const TextStyle(fontSize: 30),
                   ),
                 ],
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 2,
               color: Palatte.mainColor2,
               indent: 20,
               endIndent: 20,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
@@ -106,9 +101,9 @@ class _setLockState extends State<setLock> {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '9',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -125,9 +120,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '8',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -144,9 +139,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '7',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -171,9 +166,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '6',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -190,9 +185,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '5',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -209,9 +204,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '4',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -236,9 +231,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '3',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -255,9 +250,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '2',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -274,9 +269,9 @@ class _setLockState extends State<setLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '1',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -299,9 +294,9 @@ class _setLockState extends State<setLock> {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Palatte.mainColor,width: 2)
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                        margin: EdgeInsets.all(10),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                        margin: const EdgeInsets.all(10),
+                        child: const Text(
                           '0',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 40),
@@ -326,7 +321,7 @@ class _setLockState extends State<setLock> {
                           }
                           setState(() {});
                         },
-                        child: Text('OK',style: TextStyle(color: Palatte.mainColor2,fontSize: 20),),
+                        child: const Text('OK',style: TextStyle(color: Palatte.mainColor2,fontSize: 20),),
                       ),
                     ),
                     Container(
@@ -340,7 +335,7 @@ class _setLockState extends State<setLock> {
                           data.removeLast();
                           setState(() {});
                         },
-                        child: Text('Delete',style: TextStyle(color: Palatte.mainColor2,fontSize: 20),),
+                        child: const Text('Delete',style: TextStyle(color: Palatte.mainColor2,fontSize: 20),),
                       ),
                     )
                   ],

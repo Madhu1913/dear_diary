@@ -36,7 +36,7 @@ class _customTextFieldState extends State<customTextField> {
       child: TextFormField(
         obscureText: widget.Seen,
         cursorColor: Palatte.mainColor2,
-        style: TextStyle(color: Colors.black),
+        style: const TextStyle(color: Colors.black),
         maxLines: widget.maxLines,
         keyboardType: widget.keyboardType,
         controller: widget.controller,

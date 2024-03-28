@@ -1,13 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dear_diary/InterFace/homePage.dart';
-import 'package:dear_diary/Provider/firebaseProvider.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:dear_diary/View/customTextField.dart';
 import 'package:dear_diary/View/palatte.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class signUp extends StatefulWidget {
   final Function()? onTap;
@@ -76,7 +72,7 @@ class _signUpState extends State<signUp> {
             title: Center(
                 child: Text(
               msg,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.white),
@@ -84,152 +80,153 @@ class _signUpState extends State<signUp> {
           );
         });
   }
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w= MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: key,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: h * 0.15,
-                ),
-                Container(
-                  height:w*0.4,
-                  width: w*0.4,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage('assets/appicon.png'),
-                          fit: BoxFit.fill)
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Form(
+            key: key,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: h * 0.15,
                   ),
-                ),
-                // SizedBox(height: w*0.04,),
-                Text('Dear Diary',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w500),),
-                customTextField(
-maxLines: 1,
-                    keyboardType: TextInputType.text,
+                  Container(
+                    height:w*0.4,
+                    width: w*0.4,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(image: AssetImage('assets/appicon.png'),
+                            fit: BoxFit.fill)
+                    ),
+                  ),
+                  // SizedBox(height: w*0.04,),
+                  const Text('Dear Diary',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w500),),
+                  customTextField(
+      maxLines: 1,
+                      keyboardType: TextInputType.text,
 
-                    prefixIcon: Icon(
-                      Icons.mail,
+                      prefixIcon: const Icon(
+                        Icons.mail,
+                        color: Palatte.mainColor2,
+                      ),
+                      controller: mail,
+                      labelText: 'E-Mail',
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return 'Please Enter Your Email';
+                        } else if (!val.endsWith('@gmail.com')) {
+                          return 'Please enter a valid Email';
+                        } else {
+                          return null;
+                        }
+                      },
                       color: Palatte.mainColor2,
-                    ),
-                    controller: mail,
-                    labelText: 'E-Mail',
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return 'Please Enter Your Email';
-                      } else if (!val.endsWith('@gmail.com')) {
-                        return 'Please enter a valid Email';
-                      } else {
-                        return null;
-                      }
-                    },
-                    color: Palatte.mainColor2,
-                    Seen: false),
-                customTextField(
-                  maxLines: 1,
-                    keyboardType: TextInputType.text,
+                      Seen: false),
+                  customTextField(
+                    maxLines: 1,
+                      keyboardType: TextInputType.text,
 
-                    suffixIcon: InkWell(
-                        onTap: () {
-                          isSeen1 = !isSeen1;
-                          setState(() {
-                            if (isSeen1 == true) {
-                              icn1 = Icons.visibility;
-                            } else {
-                              icn1 = Icons.visibility_off;
-                            }
-                          });
-                        },
-                        child: Icon(
-                          icn1,
-                          color: Palatte.mainColor2,
-                        )),
-                    prefixIcon: Icon(
-                      Icons.password,
+                      suffixIcon: InkWell(
+                          onTap: () {
+                            isSeen1 = !isSeen1;
+                            setState(() {
+                              if (isSeen1 == true) {
+                                icn1 = Icons.visibility;
+                              } else {
+                                icn1 = Icons.visibility_off;
+                              }
+                            });
+                          },
+                          child: Icon(
+                            icn1,
+                            color: Palatte.mainColor2,
+                          )),
+                      prefixIcon: const Icon(
+                        Icons.password,
+                        color: Palatte.mainColor2,
+                      ),
+                      controller: password,
+                      labelText: 'Password',
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return 'Please Enter Password';
+                        } else if (val.length < 6) {
+                          return 'Please Enter Valid Password';
+                        } else {
+                          return null;
+                        }
+                      },
                       color: Palatte.mainColor2,
-                    ),
-                    controller: password,
-                    labelText: 'Password',
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return 'Please Enter Password';
-                      } else if (val.length < 6) {
-                        return 'Please Enter Valid Password';
-                      } else {
-                        return null;
-                      }
-                    },
-                    color: Palatte.mainColor2,
-                    Seen: isSeen1),
-                customTextField(
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                    prefixIcon: Icon(
-                      Icons.password,
+                      Seen: isSeen1),
+                  customTextField(
+                    maxLines: 1,
+                    keyboardType: TextInputType.text,
+                      prefixIcon: const Icon(
+                        Icons.password,
+                        color: Palatte.mainColor2,
+                      ),
+                      suffixIcon: InkWell(
+                          onTap: () {
+                            isSeen2 = !isSeen2;
+                            setState(() {
+                              if (isSeen2 == true) {
+                                icn2 = Icons.visibility;
+                              } else {
+                                icn2 = Icons.visibility_off;
+                              }
+                            });
+                          },
+                          child: Icon(
+                            icn2,
+                            color: Palatte.mainColor2,
+                          )),
+                      controller: confirmPassword,
+                      labelText: 'Confirm Password',
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return 'Please Enter Password';
+                        } else if (val.length < 6) {
+                          return 'Please Enter Valid Password';
+                        } else {
+                          return null;
+                        }
+                      },
                       color: Palatte.mainColor2,
-                    ),
-                    suffixIcon: InkWell(
-                        onTap: () {
-                          isSeen2 = !isSeen2;
-                          setState(() {
-                            if (isSeen2 == true) {
-                              icn2 = Icons.visibility;
-                            } else {
-                              icn2 = Icons.visibility_off;
-                            }
-                          });
-                        },
-                        child: Icon(
-                          icn2,
-                          color: Palatte.mainColor2,
-                        )),
-                    controller: confirmPassword,
-                    labelText: 'Confirm Password',
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return 'Please Enter Password';
-                      } else if (val.length < 6) {
-                        return 'Please Enter Valid Password';
-                      } else {
-                        return null;
-                      }
-                    },
-                    color: Palatte.mainColor2,
-                    Seen: isSeen2),
-                customButton(
-                    onPressed: () {
-                      SignUp();
-                    },
-                    color: Palatte.buttonColor,
-                    child: Text('Sign up',style: TextStyle(fontSize: 18),)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Already have an account?',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    InkWell(
-                        onTap: widget.onTap,
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                              color: Palatte.mainColor2,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        )),
-                  ],
-                )
-              ],
+                      Seen: isSeen2),
+                  customButton(
+                      onPressed: () {
+                        SignUp();
+                      },
+                      color: Palatte.mainColor,
+                      child: const Text('Sign up',style: TextStyle(fontSize: 18,color: Palatte.mainColor2),)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Already have an account?',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      InkWell(
+                          onTap: widget.onTap,
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                                color: Palatte.mainColor2,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          )),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

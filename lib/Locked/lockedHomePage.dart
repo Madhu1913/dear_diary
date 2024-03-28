@@ -2,14 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:dear_diary/Provider/lockedDataProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
-import '../View/customButton.dart';
-import '../View/customImageview.dart';
 import '../View/customLockedImageView.dart';
 import '../View/customTextField.dart';
 import '../View/palatte.dart';
@@ -33,20 +29,20 @@ class _myDiaryState extends State<myDiary> {
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
             elevation: 0,
-            title: Text('My Diary',style: TextStyle(fontSize: 26,color: Colors.black),),
+            title: const Text('My Diary',style: TextStyle(fontSize: 26,color: Colors.black),),
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
-                Get.off(() => HomePage());
+                Get.off(() => const HomePage());
               },
-              icon: Icon(Icons.arrow_back,color: Colors.black,),
+              icon: const Icon(Icons.arrow_back,color: Colors.black,),
             ),
             actions: [
               IconButton(
                   onPressed: () {
                     value.showCalender(context);
                   },
-                  icon: Icon(Icons.calendar_month_outlined,color: Colors.black,))
+                  icon: const Icon(Icons.calendar_month_outlined,color: Colors.black,))
             ],
           ),
           body: Column(
@@ -76,15 +72,15 @@ class _myDiaryState extends State<myDiary> {
                                   value.deleteItem(id);
                                 },
                                 background: Container(
-                                  color: Palatte.mainColor2, // Background color when swiping
+                                  color: Palatte.mainColor2,
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.only(right: 20), // Background color when swiping
 
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.delete,
                                     color: Colors.white,
                                     size: 36,
                                   ),
-                                  alignment: Alignment.centerRight,
-                                  padding: EdgeInsets.only(right: 20),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -99,22 +95,22 @@ class _myDiaryState extends State<myDiary> {
                                                   color: Palatte.mainColor,
                                                   borderRadius: BorderRadius.circular(8)
                                                 ),
-                                                padding: EdgeInsets.all(6),
-                                                child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
-                                            SizedBox(
+                                                padding: const EdgeInsets.all(6),
+                                                child: Text(data[i]['Time'],style: const TextStyle(color: Palatte.mainColor2),)),
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Flexible(
                                               child: Container(
                                                 // width: w*0.7,
-                                                padding: EdgeInsets.all(10),
+                                                padding: const EdgeInsets.all(10),
                                                 decoration: BoxDecoration(
                                                     color: Palatte.white,
                                                     border: Border.all(
                                                       color: Palatte.mainColor2
                                                     ),
                                                     borderRadius:
-                                                        BorderRadius.only(
+                                                        const BorderRadius.only(
                                                             topRight:
                                                                 Radius.circular(
                                                                     12),
@@ -126,7 +122,7 @@ class _myDiaryState extends State<myDiary> {
                                                                     12))),
                                                 child: Text(
                                                   data[i]['note'],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 18,
                                                       color: Palatte.mainColor2),
                                                 ),
@@ -143,31 +139,34 @@ class _myDiaryState extends State<myDiary> {
                                                 Get.to(()=>customLockedImageView(img: data[i]
                                                 ['note']));
                                               },
-                                              child: Container(
-                                                height: h * 0.25,
-                                                width: h * 0.25,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Palatte.mainColor2,width: 2
-                                                  ),
-                                                    image: DecorationImage(
-                                                        image: NetworkImage(
-                                                            data[i]['note']),
-                                                        fit: BoxFit.cover),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    32),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    32),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    32))),
+                                              child: Hero(
+                                                tag: 0,
+                                                child: Container(
+                                                  height: h * 0.25,
+                                                  width: h * 0.25,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: Palatte.mainColor2,width: 2
+                                                    ),
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                              data[i]['note']),
+                                                          fit: BoxFit.cover),
+                                                      borderRadius:
+                                                          const BorderRadius.only(
+                                                              topRight:
+                                                                  Radius.circular(
+                                                                      32),
+                                                              bottomLeft:
+                                                                  Radius.circular(
+                                                                      32),
+                                                              bottomRight:
+                                                                  Radius.circular(
+                                                                      32))),
+                                                ),
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Container(
@@ -175,8 +174,8 @@ class _myDiaryState extends State<myDiary> {
                                                   color: Palatte.mainColor,
                                                   borderRadius: BorderRadius.circular(8)
                                                 ),
-                                                padding: EdgeInsets.all(6),
-                                                child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
+                                                padding: const EdgeInsets.all(6),
+                                                child: Text(data[i]['Time'],style: const TextStyle(color: Palatte.mainColor2),)),
                                           ],
                                         ),
                                 ),
@@ -188,7 +187,7 @@ class _myDiaryState extends State<myDiary> {
                         child: Text('${snapshot.error}'),
                       );
                     }
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }),
@@ -211,7 +210,7 @@ class _myDiaryState extends State<myDiary> {
                             keyboardType: TextInputType.multiline,
                               suffixIcon: IconButton(
                                 onPressed: value.selectImage,
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.image,
                                   color: Palatte.mainColor2,
                                 ),
@@ -234,7 +233,7 @@ class _myDiaryState extends State<myDiary> {
                       ),
                       child: IconButton(
                           onPressed: value.addToDB,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.done_outline_rounded,
                             color: Palatte.mainColor2,
                           )),

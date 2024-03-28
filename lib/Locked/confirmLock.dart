@@ -2,12 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dear_diary/Locked/lockedHomePage.dart';
 import 'package:dear_diary/Locked/setLock.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../View/customButton.dart';
 import '../View/palatte.dart';
 
 class confirmLock extends StatefulWidget {
@@ -28,23 +25,23 @@ class _confirmLockState extends State<confirmLock> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text('My Diary',style: TextStyle(color: Colors.black,fontSize: 26),),
+          title: const Text('My Diary',style: TextStyle(color: Colors.black,fontSize: 26),),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              Get.off(() => setLock());
+              Get.off(() => const setLock());
             },
-            icon: Icon(Icons.arrow_back,color: Colors.black,),
+            icon: const Icon(Icons.arrow_back,color: Colors.black,),
           ),
         ),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Flexible(
@@ -53,11 +50,11 @@ class _confirmLockState extends State<confirmLock> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Palatte.mainColor,width: 2)
                     ),
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     // margin: EdgeInsets.all(10),
                     child: Text(
                       note,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Palatte.mainColor2,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
@@ -66,7 +63,7 @@ class _confirmLockState extends State<confirmLock> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             SingleChildScrollView(
@@ -75,18 +72,18 @@ class _confirmLockState extends State<confirmLock> {
                 children: [
                   Text(
                     data.join("  "),
-                    style: TextStyle(fontSize: 30),
+                    style: const TextStyle(fontSize: 30),
                   ),
                 ],
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 2,
               color:Palatte.mainColor2,
               indent: 20,
               endIndent: 20,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
@@ -106,9 +103,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '9',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -125,9 +122,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '8',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -144,9 +141,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '7',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -172,9 +169,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '6',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -191,9 +188,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '5',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -210,9 +207,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '4',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -237,9 +234,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '3',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -256,9 +253,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '2',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -275,9 +272,9 @@ class _confirmLockState extends State<confirmLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '1',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -300,9 +297,9 @@ class _confirmLockState extends State<confirmLock> {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Palatte.mainColor,width: 2)
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                        margin: EdgeInsets.all(10),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                        margin: const EdgeInsets.all(10),
+                        child: const Text(
                           '0',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 40),
@@ -317,15 +314,15 @@ class _confirmLockState extends State<confirmLock> {
 
                       child: TextButton(
                         onPressed: () {
-                          if (ListEquality().equals(data, widget.originaldata)) {
+                          if (const ListEquality().equals(data, widget.originaldata)) {
                             showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   shape: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(24)
                                   ),
-                                      title: Text('Set password',style: TextStyle(color: Palatte.mainColor2,fontSize: 26)),
-                                      content: Text(
+                                      title: const Text('Set password',style: TextStyle(color: Palatte.mainColor2,fontSize: 26)),
+                                      content: const Text(
                                           "** Don't forget your password\n** No password No access to locked folder",style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
                                       actions: [
                                         Container(
@@ -343,10 +340,10 @@ class _confirmLockState extends State<confirmLock> {
                                                     .doc(currentUser!.email)
                                                     .set({'lock': data}).then(
                                                         (value) {
-                                                  Get.to(() => myDiary());
+                                                  Get.to(() => const myDiary());
                                                 });
                                               },
-                                              child: Text('SET',style: TextStyle(color: Palatte.mainColor2,fontSize: 20))),
+                                              child: const Text('SET',style: TextStyle(color: Palatte.mainColor2,fontSize: 20))),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -358,7 +355,7 @@ class _confirmLockState extends State<confirmLock> {
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Back',style: TextStyle(color: Palatte.mainColor2,fontSize: 20))),
+                                              child: const Text('Back',style: TextStyle(color: Palatte.mainColor2,fontSize: 20))),
                                         ),
                                       ],
                                     ));
@@ -367,7 +364,7 @@ class _confirmLockState extends State<confirmLock> {
                           }
                           setState(() {});
                         },
-                        child: Text('OK',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
+                        child: const Text('OK',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
                       ),
                     ),
                     Container(
@@ -381,7 +378,7 @@ class _confirmLockState extends State<confirmLock> {
                           data.removeLast();
                           setState(() {});
                         },
-                        child: Text('Delete',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
+                        child: const Text('Delete',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
                       ),
                     )
                   ],

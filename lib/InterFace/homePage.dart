@@ -10,12 +10,9 @@ import 'package:dear_diary/View/customImageview.dart';
 import 'package:dear_diary/View/customTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import '../Notifications/firebaseApi.dart';
 import '../View/palatte.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,49 +60,49 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               elevation: 0,
               leading: IconButton(
-                icon: Icon(Icons.person_outline_rounded,color: Colors.black,),
+                icon: const Icon(Icons.person_outline_rounded,color: Colors.black,),
                 onPressed: () {
-                 Get.to(()=>profileView());
+                 Get.to(()=>const profileView());
                 },
               ),
-              title:Text('Dear Diary ',style: TextStyle(color: Colors.black),),
+              title:const Text('Dear Diary ',style: TextStyle(color: Colors.black),),
               // centerTitle: true,
               actions: [
                 IconButton(
                     onPressed: () {
                       value.showCalender(context);
                     },
-                    icon: Icon(Icons.calendar_month_outlined,color: Colors.black,)),
+                    icon: const Icon(Icons.calendar_month_outlined,color: Colors.black,)),
                 IconButton(
                     onPressed: () async{
                       await value.checkLock();
-                      await value.i==0
+                      value.i==0
                           ? showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                    title: Text('want to open LOCKED folder'),
-                                    content: Text("Locked folder let's you keep your data more safer"),
+                                    title: const Text('want to open LOCKED folder'),
+                                    content: const Text("Locked folder let's you keep your data more safer"),
                                     actions: [
                                       customButton(
                                           color:Palatte.mainColor,
                                           onPressed: () {
-                                            Get.to(()=>setLock());
+                                            Get.to(()=>const setLock());
                                           },
-                                          child: Text('YES',style: TextStyle(color: Palatte.mainColor2,fontSize: 18),)),
+                                          child: const Text('YES',style: TextStyle(color: Palatte.mainColor2,fontSize: 18),)),
                                       customButton(
                                         color:Palatte.mainColor,
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },
-                                          child: Text('NO',style: TextStyle(color: Palatte.mainColor2,fontSize: 18),)),
+                                          child: const Text('NO',style: TextStyle(color: Palatte.mainColor2,fontSize: 18),)),
                                     ],
                                   ))
-                          : Get.to(()=>checkLock());
+                          : Get.to(()=>const checkLock());
                     },
-                    icon: Icon(Icons.lock_outline_rounded,color: Colors.black,)),
+                    icon: const Icon(Icons.lock_outline_rounded,color: Colors.black,)),
                 IconButton(onPressed: (){
-                  Get.to(()=>addReminders());
-                }, icon: Icon(Icons.task_alt_rounded,color: Colors.black,))
+                  Get.to(()=>const addReminders());
+                }, icon: const Icon(Icons.task_alt_rounded,color: Colors.black,))
               ],
             ),
             body: Column(
@@ -134,14 +131,14 @@ class _HomePageState extends State<HomePage> {
                                     value.deleteItem(id);
                                   },
                                   background: Container(
-                                    color: Palatte.mainColor2, // Background color when swiping
-                                    child: Icon(
+                                    color: Palatte.mainColor2,
+                                    alignment: Alignment.centerRight,
+                                    padding: const EdgeInsets.only(right: 20), // Background color when swiping
+                                    child: const Icon(
                                       Icons.delete,
                                       color: Colors.white,
                                       size: 36,
                                     ),
-                                    alignment: Alignment.centerRight,
-                                    padding: EdgeInsets.only(right: 20),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -156,18 +153,18 @@ class _HomePageState extends State<HomePage> {
                                                     borderRadius: BorderRadius.circular(8),
                                                     color: Palatte.mainColor
                                                   ),
-                                                  padding: EdgeInsets.all(6),
-                                                  child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
-                                              SizedBox(
+                                                  padding: const EdgeInsets.all(6),
+                                                  child: Text(data[i]['Time'],style: const TextStyle(color: Palatte.mainColor2),)),
+                                              const SizedBox(
                                                 width: 20,
                                               ),
                                               Flexible(
                                                 child: Container(
-                                                  padding: EdgeInsets.all(10),
+                                                  padding: const EdgeInsets.all(10),
                                                   decoration: BoxDecoration(
                                                       color: Palatte.white, // Background color when swiping
                                                       borderRadius:
-                                                          BorderRadius.only(
+                                                          const BorderRadius.only(
                                                               topRight:
                                                                   Radius.circular(
                                                                       12),
@@ -181,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                   child: Text(
                                                     data[i]['note'],
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 18,
                                                         color: Palatte.mainColor2),
                                                   ),
@@ -198,29 +195,32 @@ class _HomePageState extends State<HomePage> {
                                                   Get.to(()=>customImageView(img: data[i]
                                                   ['note']));
                                                 },
-                                                child: Container(
-                                                  height: h * 0.25,
-                                                  width: h * 0.25,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(color: Palatte.mainColor2),
-                                                      image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              data[i]['note']),
-                                                          fit: BoxFit.cover),
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight:
-                                                                  Radius.circular(
-                                                                      32),
-                                                              bottomLeft:
-                                                                  Radius.circular(
-                                                                      32),
-                                                              bottomRight:
-                                                                  Radius.circular(
-                                                                      32))),
+                                                child: Hero(
+                                                  tag: 1,
+                                                  child: Container(
+                                                    height: h * 0.25,
+                                                    width: h * 0.25,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(color: Palatte.mainColor2),
+                                                        image: DecorationImage(
+                                                            image: NetworkImage(
+                                                                data[i]['note']),
+                                                            fit: BoxFit.cover),
+                                                        borderRadius:
+                                                            const BorderRadius.only(
+                                                                topRight:
+                                                                    Radius.circular(
+                                                                        32),
+                                                                bottomLeft:
+                                                                    Radius.circular(
+                                                                        32),
+                                                                bottomRight:
+                                                                    Radius.circular(
+                                                                        32))),
+                                                  ),
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 20,
                                               ),
                                               Container(
@@ -228,8 +228,8 @@ class _HomePageState extends State<HomePage> {
                                                     color: Palatte.mainColor,
                                                     borderRadius: BorderRadius.circular(8)
                                                   ),
-                                                  padding: EdgeInsets.all(6),
-                                                  child: Text(data[i]['Time'],style: TextStyle(color: Palatte.mainColor2),)),
+                                                  padding: const EdgeInsets.all(6),
+                                                  child: Text(data[i]['Time'],style: const TextStyle(color: Palatte.mainColor2),)),
                                             ],
                                           ),
                                   ),
@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text('${snapshot.error}'),
                         );
                       }
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }),
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                               keyboardType: TextInputType.multiline,
                                 suffixIcon: IconButton(
                                   onPressed: value.selectImage,
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.image,
                                     color: Palatte.mainColor2,
                                   ),
@@ -289,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: (){
                               value.addToDB();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.done_outline_rounded,
                               color: Palatte.mainColor2,
                             )),

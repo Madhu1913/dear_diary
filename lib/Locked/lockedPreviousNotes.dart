@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:dear_diary/Locked/lockedHomePage.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
-import 'package:dear_diary/Provider/lockedDataProvider.dart';
 import 'package:dear_diary/View/palatte.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +29,7 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
   }
   Future getdata()async{
     await FirebaseFirestore.instance.collection('Users').doc(currentUser!.uid).collection(widget.date).get().then((value){
-      if(value.docs.length!=0){
+      if(value.docs.isNotEmpty){
         i=1;
       }else{
         i=0;
@@ -51,13 +49,13 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
           builder: (context,value,child)=>Scaffold(
             appBar: AppBar(
               elevation: 0,
-              title: Text('Dear Diary',style: TextStyle(color: Colors.black),),centerTitle: true,leading: IconButton(
+              title: const Text('Dear Diary',style: TextStyle(color: Colors.black),),centerTitle: true,leading: IconButton(
               onPressed: (){
-                Get.off(()=>myDiary());
+                Get.off(()=>const myDiary());
               },
-              icon: Icon(Icons.arrow_back,color: Colors.black,),
+              icon: const Icon(Icons.arrow_back,color: Colors.black,),
             ),),
-            body:  isLoading ? Center(
+            body:  isLoading ? const Center(
               child: CircularProgressIndicator(),
             ):i==1?StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -83,14 +81,14 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
                               MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(data[i]['Time']),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Flexible(
                                   child: Container(
                                     // width: w*0.7,
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: const BoxDecoration(
                                         color: Palatte.mainColor2,
                                         borderRadius:
                                         BorderRadius.only(
@@ -105,7 +103,7 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
                                                 16))),
                                     child: Text(
                                       data[i]['note'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.white),
                                     ),
@@ -131,7 +129,7 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
                                                 data[i]['note']),
                                             fit: BoxFit.cover),
                                         borderRadius:
-                                        BorderRadius.only(
+                                        const BorderRadius.only(
                                             topRight: Radius
                                                 .circular(32),
                                             bottomLeft:
@@ -142,7 +140,7 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
                                                 32))),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Text(data[i]['Time']),
@@ -156,10 +154,10 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
                     );
                   }
 
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }):Center(
+                }):const Center(
               child: Text('No data found'),
             ),
           ),

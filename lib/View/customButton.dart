@@ -17,13 +17,13 @@ class _customButtonState extends State<customButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: widget.onPressed,
-      child: widget.child,
       style: ElevatedButton.styleFrom(
         backgroundColor: widget.color,
         foregroundColor: Palatte.white,
         elevation: 10,
         // padding: EdgeInsets.all(10),
       ),
+      child: widget.child,
     );
   }
 }

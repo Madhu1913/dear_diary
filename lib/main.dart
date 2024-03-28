@@ -1,5 +1,3 @@
-import 'package:dear_diary/Authentication/Login.dart';
-import 'package:dear_diary/Authentication/authPage.dart';
 import 'package:dear_diary/Notifications/firebaseApi.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
 import 'package:dear_diary/Provider/lockedDataProvider.dart';
@@ -19,7 +17,7 @@ void main() async{
   );
   await FirebaseApi().initNotification();
   tz.initializeTimeZones();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -37,11 +35,11 @@ class MyApp extends StatelessWidget {
           useMaterial3: false
         ).copyWith(
     scaffoldBackgroundColor: Palatte.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
     backgroundColor: Palatte.white
     ),),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

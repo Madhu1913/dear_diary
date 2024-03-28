@@ -11,18 +11,21 @@ class customImageView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Dear Diary',style: TextStyle(color: Colors.black),),
+          title: const Text('Dear Diary',style: TextStyle(color: Colors.black),),
           elevation: 0,
           leading: IconButton(onPressed: (){
-            Get.off(()=>HomePage());
+            Get.off(()=>const HomePage());
           },
-          icon: Icon(Icons.arrow_back,color: Colors.black,),),
+          icon: const Icon(Icons.arrow_back,color: Colors.black,),),
         ),
-        body: Center(
-          child: Container(
-            height: h*0.5,
-            width: h*0.5,
-            decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(img))),
+        body: Hero(
+          tag: 1,
+          child: Center(
+            child: Container(
+              height: h*0.5,
+              width: h*0.5,
+              decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(img))),
+            ),
           ),
         ),
       ),

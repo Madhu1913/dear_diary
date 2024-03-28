@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dear_diary/InterFace/homePage.dart';
 import 'package:dear_diary/Provider/firebaseProvider.dart';
-import 'package:dear_diary/View/customButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -26,19 +23,19 @@ class _profileViewState extends State<profileView> {
       child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            title: Text('Dear Diary',style: TextStyle(color: Colors.black),),
+            title: const Text('Dear Diary',style: TextStyle(color: Colors.black),),
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back,color: Colors.black,),
+              icon: const Icon(Icons.arrow_back,color: Colors.black,),
               onPressed: () {
-                Get.off(()=>HomePage());
+                Get.off(()=>const HomePage());
               },
             ),
             actions: [
               IconButton(onPressed: (){
                 Navigator.pop(context);
                 FirebaseAuth.instance.signOut();
-              }, icon: Icon(Icons.logout,color: Colors.black,))
+              }, icon: const Icon(Icons.logout,color: Colors.black,))
             ],
           ),
           body: StreamBuilder(
@@ -55,7 +52,7 @@ class _profileViewState extends State<profileView> {
                   builder: (context, value, child) => Column(
                     children: [
                       Center(
-                        child: Stack(alignment: Alignment(1, 1), children: [
+                        child: Stack(alignment: const Alignment(1, 1), children: [
                           Container(
                             decoration:BoxDecoration(
                               border: Border.all(
@@ -81,7 +78,7 @@ class _profileViewState extends State<profileView> {
                                   onPressed: () {
                                     value.selectProfileImage();
                                   },
-                                  icon: Icon(Icons.image,size:36,color: Palatte.mainColor2,)),
+                                  icon: const Icon(Icons.image,size:36,color: Palatte.mainColor2,)),
                             ),
                           )
                         ]),
@@ -92,11 +89,11 @@ class _profileViewState extends State<profileView> {
                               borderRadius: BorderRadius.circular(24),
                             border: Border.all(color: Palatte.mainColor,width: 3)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(20),
                           child: Text(
                             'E-mail : ${currentUser!.email}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                               color: Palatte.mainColor2,
@@ -110,7 +107,7 @@ class _profileViewState extends State<profileView> {
               } else if (snapshot.hasError) {
                 return Center(child: Text('${snapshot.error}'));
               }
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             },

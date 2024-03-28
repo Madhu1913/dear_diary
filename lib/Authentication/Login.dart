@@ -1,7 +1,10 @@
+import 'package:dear_diary/Authentication/forgotPassword.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:dear_diary/View/customTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../View/palatte.dart';
 
@@ -52,7 +55,7 @@ class _loginState extends State<login> {
             title: Center(
                 child: Text(
               msg,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   color: Colors.white),
@@ -71,7 +74,7 @@ class _loginState extends State<login> {
 
     return SafeArea(
         child: Scaffold(
-      body: SingleChildScrollView(
+              body: SingleChildScrollView(
         child: Form(
           key: key1,
           child: Padding(
@@ -84,18 +87,18 @@ class _loginState extends State<login> {
                 Container(
                   height:w*0.4,
                   width: w*0.4,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       image: DecorationImage(image: AssetImage('assets/appicon.png'),
                           fit: BoxFit.fill)
                   ),
                 ),
                 // SizedBox(height: w*0.04,),
-                Text('Dear Diary',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w500),),
+                const Text('Dear Diary',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w500),),
                 customTextField(
                   keyboardType: TextInputType.text,
                   maxLines: 1,
                   Seen: false,
-                    prefixIcon: Icon(Icons.email,color: Palatte.mainColor2,),
+                    prefixIcon: const Icon(Icons.email,color: Palatte.mainColor2,),
                     controller: email,
                     labelText: 'Enter Your Email',
                     validator: (val) {
@@ -114,7 +117,7 @@ class _loginState extends State<login> {
                   keyboardType: TextInputType.text,
 
                   Seen: isSeen,
-                    prefixIcon: Icon(Icons.password,color: Palatte.mainColor2,),
+                    prefixIcon: const Icon(Icons.password,color: Palatte.mainColor2,),
                     suffixIcon: InkWell(
                         onTap: () {
                           isSeen = !isSeen;
@@ -142,23 +145,33 @@ class _loginState extends State<login> {
                     },
                   color: Palatte.mainColor2,
                 ),
-                SizedBox(
+                const SizedBox(height: 7,),
+                Row(mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                        onTap: (){
+                          Get.to(()=>const forgotPassword());
+                        },
+                        child: const Text('Forgot Password?',style: TextStyle(color: Palatte.buttonColor),))
+                  ],
+                ),
+                const SizedBox(
                   height: 20,
                 ),
                 customButton(
-                    color: Palatte.buttonColor,
-                    onPressed: Login, child: Text('Login')),
-                SizedBox(height: 10),
+                    color: Palatte.mainColor,
+                    onPressed: Login, child: const Text('Login',style: TextStyle(color: Palatte.mainColor2,fontSize: 18),)),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('Not a Registered user?'),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
                     InkWell(
                         onTap: widget.onTap,
-                        child: Text(
+                        child: const Text(
                           'Register',
                           style: TextStyle(
                               color: Palatte.mainColor2,
@@ -171,7 +184,7 @@ class _loginState extends State<login> {
             ),
           ),
         ),
-      ),
-    ));
+              ),
+            ));
   }
 }

@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-import '../InterFace/previousNotes.dart';
 import '../Locked/lockedPreviousNotes.dart';
 class lockedData extends ChangeNotifier{
   final currentUser = FirebaseAuth.instance.currentUser;

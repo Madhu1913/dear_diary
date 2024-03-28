@@ -3,9 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dear_diary/InterFace/homePage.dart';
-import 'package:dear_diary/InterFace/reminders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -34,14 +32,14 @@ class FirebaseApi{
   void handleMessage(RemoteMessage? message){
     if(message==null) {return; }
     else{
-      Get.to(()=>HomePage());
+      Get.to(()=>const HomePage());
     }
 
   }
   void handleFirebaseMessage(RemoteMessage? message){
     if(message==null) {return; }
     else{
-      Get.to(()=>HomePage());
+      Get.to(()=>const HomePage());
     }
 
   }
@@ -57,7 +55,7 @@ class FirebaseApi{
         title,
         body,
         tz.TZDateTime.from(scheduledNotificationDateTime, tz.local),
-        await NotificationDetails(
+        NotificationDetails(
             android: AndroidNotificationDetails(
                 androidChannel.id,
                 androidChannel.name,

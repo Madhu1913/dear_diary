@@ -7,7 +7,6 @@ import 'package:dear_diary/Provider/lockedDataProvider.dart';
 import 'package:dear_diary/View/customButton.dart';
 import 'package:dear_diary/View/customTextField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
@@ -33,16 +32,16 @@ class _addRemindersState extends State<addReminders> {
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
             elevation: 0,
-            title: Text(
+            title: const Text(
               'My Reminders',
               style: TextStyle(color: Colors.black),
             ),
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
-                Get.off(() => HomePage());
+                Get.off(() => const HomePage());
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.black,
               ),
@@ -71,8 +70,8 @@ class _addRemindersState extends State<addReminders> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                         margin:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        padding: EdgeInsets.all(10),
+                            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +82,7 @@ class _addRemindersState extends State<addReminders> {
                                 Flexible(
                                   child: Text(
                                     data[i]['Task'],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Palatte.mainColor2,
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold),
@@ -98,7 +97,7 @@ class _addRemindersState extends State<addReminders> {
                                           .doc(id)
                                           .delete();
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.delete,
                                       color: Palatte.buttonColor,
                                       size: 30,
@@ -107,7 +106,7 @@ class _addRemindersState extends State<addReminders> {
                             ),
                             Text(
                               data[i]['Time'].toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             )
@@ -120,7 +119,7 @@ class _addRemindersState extends State<addReminders> {
                   child: Text('${snapshot.error}'),
                 );
               }
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             },
@@ -131,9 +130,9 @@ class _addRemindersState extends State<addReminders> {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                        title: Text('Add Reminder?'),
+                        title: const Text('Add Reminder?'),
                         content: ConstrainedBox(
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                             minWidth: 200,
                             minHeight: 20,
                             maxWidth: 200,
@@ -159,13 +158,13 @@ class _addRemindersState extends State<addReminders> {
                                     onChanged: (val) => date = val,
                                     onConfirm: (val) {});
                               },
-                              icon: Icon(Icons.calendar_month_outlined,color: Palatte.mainColor2,)),
+                              icon: const Icon(Icons.calendar_month_outlined,color: Palatte.mainColor2,)),
                           customButton(
                               color: Palatte.mainColor,
                               onPressed: () {
                                 if(date!=null){
                                   value.addTaskTodb(task.text.trim(), date!);
-                                  Random random = new Random();
+                                  Random random = Random();
                                   int randomNumber = random.nextInt(1000);
 
                                   FirebaseApi().scheduleNotification(
@@ -177,18 +176,18 @@ class _addRemindersState extends State<addReminders> {
                                   Navigator.pop(context);
                                 }
                               },
-                              child: Text('Add',style: TextStyle(color: Palatte.mainColor2),)),
+                              child: const Text('Add',style: TextStyle(color: Palatte.mainColor2),)),
                           customButton(
                               color: Palatte.mainColor,
                               onPressed: () {
                                 task.clear();
                                 Navigator.pop(context);
                               },
-                              child: Text('Cancel',style: TextStyle(color: Palatte.mainColor2),))
+                              child: const Text('Cancel',style: TextStyle(color: Palatte.mainColor2),))
                         ],
                       ));
             },
-            child: Icon(Icons.add,color: Palatte.mainColor2,size: 30,),
+            child: const Icon(Icons.add,color: Palatte.mainColor2,size: 30,),
           ),
         ),
       ),

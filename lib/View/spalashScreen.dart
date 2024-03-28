@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>with SingleTickerProviderSta
       curve: Curves.linear,
     ));
     _controller!.forward();
-    Timer(const Duration(milliseconds: 1600), () => Get.to(()=>AuthPage()));
+    Timer(const Duration(milliseconds: 1600), () => Get.to(()=>const AuthPage()));
 
   }
 
@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen>with SingleTickerProviderSta
               Container(
                 height:w*0.7,
                 width: w*0.7,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(image: AssetImage('assets/appicon.png'),
                   fit: BoxFit.fill)
                 ),

@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../View/customButton.dart';
 import '../View/palatte.dart';
 
 class checkLock extends StatefulWidget {
@@ -25,23 +24,23 @@ class _checkLockState extends State<checkLock> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text('My Diary',style: TextStyle(fontSize: 26,color: Colors.black),),
+          title: const Text('My Diary',style: TextStyle(fontSize: 26,color: Colors.black),),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-             Get.off(()=>HomePage());
+             Get.off(()=>const HomePage());
             },
-            icon: Icon(Icons.arrow_back,color: Colors.black,),
+            icon: const Icon(Icons.arrow_back,color: Colors.black,),
           ),
         ),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Flexible(
@@ -50,11 +49,11 @@ class _checkLockState extends State<checkLock> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Palatte.mainColor,width: 2)
                     ),
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     // margin: EdgeInsets.all(10),
                     child: Text(
                       note,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Palatte.mainColor2,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
@@ -63,7 +62,7 @@ class _checkLockState extends State<checkLock> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             SingleChildScrollView(
@@ -72,18 +71,18 @@ class _checkLockState extends State<checkLock> {
                 children: [
                   Text(
                     data.join("  "),
-                    style: TextStyle(fontSize: 30),
+                    style: const TextStyle(fontSize: 30),
                   ),
                 ],
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 2,
               color:Palatte.mainColor2,
               indent: 20,
               endIndent: 20,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
@@ -103,9 +102,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '9',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -122,9 +121,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '8',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -141,9 +140,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '7',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -168,9 +167,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '6',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -187,9 +186,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '5',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -206,9 +205,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '4',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -233,9 +232,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '3',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -252,9 +251,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '2',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -271,9 +270,9 @@ class _checkLockState extends State<checkLock> {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Palatte.mainColor,width: 2)
                           ),
-                          padding: EdgeInsets.all(20),
-                          margin: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(
                             '1',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 40),
@@ -296,9 +295,9 @@ class _checkLockState extends State<checkLock> {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Palatte.mainColor,width: 2)
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                        margin: EdgeInsets.all(10),
-                        child: Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                        margin: const EdgeInsets.all(10),
+                        child: const Text(
                           '0',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 40),
@@ -322,14 +321,14 @@ class _checkLockState extends State<checkLock> {
                             child: TextButton(
 
                               onPressed: () async {
-                                if (ListEquality().equals(password, data)) {
-                                  Get.to(() => myDiary());
+                                if (const ListEquality().equals(password, data)) {
+                                  Get.to(() => const myDiary());
                                 } else {
                                   note = 'Please enter correct password';
                                 }
                                 setState(() {});
                               },
-                              child: Text('OK',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
+                              child: const Text('OK',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
                             ),
                           );
                         }),
@@ -344,7 +343,7 @@ class _checkLockState extends State<checkLock> {
                           data.removeLast();
                           setState(() {});
                         },
-                        child: Text('Delete',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
+                        child: const Text('Delete',style: TextStyle(color: Palatte.mainColor2,fontSize: 20)),
                       ),
                     )
                   ],
