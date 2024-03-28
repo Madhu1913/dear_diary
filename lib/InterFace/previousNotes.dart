@@ -53,6 +53,7 @@ class _previousNotesState extends State<previousNotes> {
               onPressed: (){
                 Get.off(()=>const HomePage());
               },
+              tooltip: 'Back',
               icon: const Icon(Icons.arrow_back,color: Colors.black,),
             ),),
                 body:  isLoading ? const Center(child:CircularProgressIndicator()):i==1?StreamBuilder(

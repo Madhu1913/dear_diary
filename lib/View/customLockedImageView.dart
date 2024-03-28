@@ -16,6 +16,8 @@ class customLockedImageView extends StatelessWidget {
           leading: IconButton(onPressed: (){
             Get.off(()=>const myDiary());
           },
+            tooltip: 'Back',
+
             icon: const Icon(Icons.arrow_back,color: Colors.black,),),
         ),
         body: Hero(

@@ -16,7 +16,9 @@ class customImageView extends StatelessWidget {
           leading: IconButton(onPressed: (){
             Get.off(()=>const HomePage());
           },
-          icon: const Icon(Icons.arrow_back,color: Colors.black,),),
+            tooltip: 'Back',
+
+            icon: const Icon(Icons.arrow_back,color: Colors.black,),),
         ),
         body: Hero(
           tag: 1,

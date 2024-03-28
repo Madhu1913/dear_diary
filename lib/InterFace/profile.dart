@@ -26,15 +26,18 @@ class _profileViewState extends State<profileView> {
             title: const Text('Dear Diary',style: TextStyle(color: Colors.black),),
             centerTitle: true,
             leading: IconButton(
+              tooltip: 'Back',
               icon: const Icon(Icons.arrow_back,color: Colors.black,),
               onPressed: () {
                 Get.off(()=>const HomePage());
               },
             ),
             actions: [
-              IconButton(onPressed: (){
-                Navigator.pop(context);
-                FirebaseAuth.instance.signOut();
+              IconButton(
+                  tooltip: 'Logout',
+                  onPressed: (){
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pop(context);
               }, icon: const Icon(Icons.logout,color: Colors.black,))
             ],
           ),

@@ -28,6 +28,7 @@ class _confirmLockState extends State<confirmLock> {
           title: const Text('My Diary',style: TextStyle(color: Colors.black,fontSize: 26),),
           centerTitle: true,
           leading: IconButton(
+            tooltip: 'Back',
             onPressed: () {
               Get.off(() => const setLock());
             },

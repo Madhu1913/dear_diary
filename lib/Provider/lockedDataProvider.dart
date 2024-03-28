@@ -139,7 +139,7 @@ if(note.text.trim()!=''){
     }
     notifyListeners();
   }
- var myformatter=DateFormat('dd-mm-yyyy,H:mm a');
+ var myformatter=DateFormat('dd-MM-yyyy,H:mm a');
   var now;
   void addTaskTodb(String data,DateTime value)async{
      now=myformatter.format(DateTime.now());

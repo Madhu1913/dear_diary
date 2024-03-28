@@ -32,6 +32,8 @@ class _myDiaryState extends State<myDiary> {
             title: const Text('My Diary',style: TextStyle(fontSize: 26,color: Colors.black),),
             centerTitle: true,
             leading: IconButton(
+              tooltip: 'Back',
+
               onPressed: () {
                 Get.off(() => const HomePage());
               },
@@ -39,6 +41,7 @@ class _myDiaryState extends State<myDiary> {
             ),
             actions: [
               IconButton(
+                tooltip: 'Previous notes',
                   onPressed: () {
                     value.showCalender(context);
                   },

@@ -61,6 +61,7 @@ class _HomePageState extends State<HomePage> {
               elevation: 0,
               leading: IconButton(
                 icon: const Icon(Icons.person_outline_rounded,color: Colors.black,),
+                tooltip: 'Profile',
                 onPressed: () {
                  Get.to(()=>const profileView());
                 },
@@ -72,8 +73,10 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       value.showCalender(context);
                     },
+                    tooltip: 'Previous notes',
                     icon: const Icon(Icons.calendar_month_outlined,color: Colors.black,)),
                 IconButton(
+                  tooltip: 'Locked folder',
                     onPressed: () async{
                       await value.checkLock();
                       value.i==0
@@ -100,7 +103,9 @@ class _HomePageState extends State<HomePage> {
                           : Get.to(()=>const checkLock());
                     },
                     icon: const Icon(Icons.lock_outline_rounded,color: Colors.black,)),
-                IconButton(onPressed: (){
+                IconButton(
+                    tooltip: 'Reminders',
+                    onPressed: (){
                   Get.to(()=>const addReminders());
                 }, icon: const Icon(Icons.task_alt_rounded,color: Colors.black,))
               ],

@@ -38,6 +38,7 @@ class _addRemindersState extends State<addReminders> {
             ),
             centerTitle: true,
             leading: IconButton(
+              tooltip: 'Back',
               onPressed: () {
                 Get.off(() => const HomePage());
               },
@@ -147,18 +148,19 @@ class _addRemindersState extends State<addReminders> {
                                   val!.isEmpty ? 'Please enter a Reminder' : null,
                               labelText: 'Reminder',
                               Seen: false,
+                              suffixIcon:  IconButton(
+                                  onPressed: () {
+                                    DatePicker.showDateTimePicker(context,
+                                        showTitleActions: true,
+                                        onChanged: (val) => date = val,
+                                        onConfirm: (val) {});
+                                  },
+                                  icon: const Icon(Icons.calendar_month_outlined,color: Palatte.mainColor2,)),
                             ),
                           ),
                         ),
                         actions: [
-                          IconButton(
-                              onPressed: () {
-                                DatePicker.showDateTimePicker(context,
-                                    showTitleActions: true,
-                                    onChanged: (val) => date = val,
-                                    onConfirm: (val) {});
-                              },
-                              icon: const Icon(Icons.calendar_month_outlined,color: Palatte.mainColor2,)),
+
                           customButton(
                               color: Palatte.mainColor,
                               onPressed: () {

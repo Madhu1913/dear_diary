@@ -53,6 +53,7 @@ class _lockedPreviousNotesState extends State<lockedPreviousNotes> {
               onPressed: (){
                 Get.off(()=>const myDiary());
               },
+              tooltip: 'Back',
               icon: const Icon(Icons.arrow_back,color: Colors.black,),
             ),),
             body:  isLoading ? const Center(
